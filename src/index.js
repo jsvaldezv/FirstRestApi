@@ -4,16 +4,16 @@ const morgan = require('morgan');
 
 // SETTINGS 
 app.set('port', process.env.PORT || 3000);
+app.set('json spaces', 2);
+
+// ROUTES
+app.use(require('./routes/index'));
+app.use('/api/movies', require('./routes/movies'));
 
 // MIDDLEWARES
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-
-// ROUTES
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
 
 // START SERVER
 app.listen(app.get('port'), () => {
