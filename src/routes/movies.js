@@ -7,4 +7,9 @@ router.get('/', (req, res) => {
     res.json(movies);
 });
 
+router.post('/', (req, res) => {
+    console.log(req.body);
+    res.send("recieved");
+});
+
 module.exports = router;
