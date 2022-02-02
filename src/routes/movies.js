@@ -28,7 +28,28 @@ router.post('/', jsonParser, (req, res) => {
     res.send("recieved");
 });
 
-router.delete('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
+    const { id } = req.params;
+    const {title, director, year, rating} = req.body;
+    if(title && director && year && rating)
+    {
+        _.each(movies, (movie, i) => {
+            if(movie.id == id){
+                movie.title = title;
+                movie.director = director;
+                movie.year = year;
+                movie.rating = rating;
+            }
+        });
+        
+        res.json(movies);
+    }
+    else{
+        res.status(500).json({error: 'There was and error'});
+    }
+});
+
+router.delete('/:id', jsonParser, (req, res) => {
     const { id } = req.params;
     _.each(movies, (movie, i) => {
         if(movie.id == id){
